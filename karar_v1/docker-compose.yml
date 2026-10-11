@@ -1,0 +1,32 @@
+services:
+  karar:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: karar-tutor
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./server/certs:/app/server/certs:ro
+      - ./server/data:/app/server/data
+    environment:
+      - NODE_ENV=production
+      - HOST=0.0.0.0
+      - PORT=5000
+      - KARAR_LOCAL_AUTH=${KARAR_LOCAL_AUTH:-false}
+      - KARAR_TLS_PFX_PATH=/app/server/certs/karar-local.pfx
+      - KARAR_TLS_PFX_PASSWORD=${KARAR_TLS_PFX_PASSWORD:-}
+      - KARAR_DATA_PATH=/app/server/data/karar-local.json
+      - KARAR_DOCUMENTS_PATH=/app/server/data/karar-documents.json
+      - KARAR_DATA_KEY=${KARAR_DATA_KEY:-}
+      - OLLAMA_BASE_URL=${OLLAMA_BASE_URL:-http://host.docker.internal:11434}
+      - OLLAMA_MODEL=${OLLAMA_MODEL:-llama3.2:3b}
+      - OLLAMA_TRANSLATION_MODEL=${OLLAMA_TRANSLATION_MODEL:-qwen2.5:3b}
+      - OLLAMA_EMBEDDING_MODEL=${OLLAMA_EMBEDDING_MODEL:-nomic-embed-text}
+      - OLLAMA_TIMEOUT=${OLLAMA_TIMEOUT:-180}
+      - KARAR_MAX_UPLOAD_BYTES=${KARAR_MAX_UPLOAD_BYTES:-5242880}
+      - APP_URL=${APP_URL:-}
+      - SUPABASE_URL=${SUPABASE_URL:-}
+      - SUPABASE_ANON_KEY=${SUPABASE_ANON_KEY:-}
+      - SUPABASE_SERVICE_ROLE_KEY=${SUPABASE_SERVICE_ROLE_KEY:-}
+      - SESSION_SECRET=${SESSION_SECRET:-}

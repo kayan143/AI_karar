@@ -1,0 +1,37 @@
+{
+  "name": "karar-tutor",
+  "version": "1.0.0",
+  "description": "Karar - AI Tutor for IT Students",
+  "type": "module",
+  "main": "server/index.js",
+  "scripts": {
+    "dev": "concurrently --kill-others \"npm run dev:server\" \"npm run dev:client\"",
+    "dev:server": "node --watch server/dev.js",
+    "dev:client": "npm --prefix client run dev",
+    "lint": "eslint .",
+    "build": "npm --prefix client run build",
+    "start": "node server/index.js",
+    "test": "node --test server/*.test.js",
+    "test:ollama": "node --test server/ollama.test.js",
+    "test:documents": "node --test server/documents.test.js",
+    "reset:local-owner": "node server/reset-local-owner.js",
+    "build:docker": "docker build -t karar-tutor .",
+    "run:docker": "docker run -p 5000:5000 karar-tutor"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "pdfjs-dist": "^4.10.38"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "concurrently": "^8.2.2",
+    "eslint": "^10.12.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.7",
+    "eslint-plugin-react-x": "^5.24.10",
+    "globals": "^17.13.0",
+    "typescript-eslint": "^8.71.1"
+  }
+}
